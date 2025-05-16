@@ -1,36 +1,146 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Typing Speed Game
+
+A web-based typing speed game built with Next.js, Prisma ORM, and PostgreSQL. This project tracks user scores including accuracy and words per minute (WPM), with a backend powered by Prisma and a PostgreSQL database.
+
+
+## Features
+
+* Timer-based typing speed test
+* Tracks score, accuracy, and WPM
+* Stores and fetches sentences for typing practice
+* Stores user scores with timestamps
+* REST API with Next.js API routes
+* Database seeding with Prisma
+* TypeScript support
+
+
+## Tech Stack
+
+* **Frontend:** Next.js (React)
+* **Backend:** Node.js, Next.js API routes
+* **Database:** PostgreSQL
+* **ORM:** Prisma
+* **Language:** TypeScript / JavaScript
+
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+* Node.js (v16 or later recommended)
+* PostgreSQL database
+* Yarn or npm
+
+### Installation
+
+1. **Clone the repository**
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/yourusername/typing-speed-game.git
+cd typing-speed-game
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Install dependencies**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn install
+# or
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. **Configure environment variables**
 
-## Learn More
+Create a `.env` file in the root directory:
 
-To learn more about Next.js, take a look at the following resources:
+```env
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=public"
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Replace the placeholders with your actual PostgreSQL connection details.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. **Generate Prisma Client**
 
-## Deploy on Vercel
+```bash
+npx prisma generate
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. **Run migrations**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npx prisma migrate dev --name init
+```
+
+6. **Seed the database**
+
+```bash
+node prisma/seed.js
+```
+
+This will populate your database with initial sentences for the typing test.
+
+7. **Run the development server**
+
+```bash
+yarn dev
+# or
+npm run dev
+```
+
+Open your browser at [http://localhost:3000](http://localhost:3000) to see the app.
+
+
+## Project Structure
+
+```
+/prisma
+  ├── migrations/        # Database migration files
+  ├── seed.js            # Seed script to populate initial data
+  └── schema.prisma      # Prisma schema file
+
+/src
+  ├── app                # Next.js app directory with React components and API routes
+  │   ├── api
+  │   │   ├── sentences  # API routes for sentences
+  │   │   └── scores     # API routes for scores
+  ├── generated/prisma   # Prisma client (ignored in git)
+/package.json
+/.env
+```
+
+
+## API Endpoints
+
+* `GET /api/sentences` - Fetch a random sentence for typing practice
+* `POST /api/scores` - Submit a user score (score, accuracy, wpm)
+
+
+## Usage Notes
+
+* The project uses Prisma Client generated in `/src/generated/prisma`. This folder is gitignored; run `npx prisma generate` after cloning.
+* The seed script uses `node prisma/seed.js` (runs with plain Node.js).
+* Make sure to run `npx prisma migrate dev` before seeding to create the database schema.
+* Use modern Node.js (v16+) for better ES module support.
+
+
+## Troubleshooting
+
+* **Error: @prisma/client did not initialize yet:** Run `npx prisma generate` and ensure the client is generated.
+* **Unknown file extension ".ts" errors:** Rename seed script to `.js` or run with `ts-node`.
+* **Module resolution errors:** Check your import paths and ensure `"type": "module"` in `package.json` if using ES modules.
+
+
+## Future Improvements
+
+* Add user authentication and profiles
+* Enhance UI/UX with Tailwind CSS or another styling framework
+* Add leaderboards and score history
+* Add multiplayer support or challenge mode
+* Improve accessibility and mobile responsiveness
+
+
+## License
+
+[MIT License](LICENSE)
+
+---
+
