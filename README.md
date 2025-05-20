@@ -130,12 +130,11 @@ Open your browser at [http://localhost:3000](http://localhost:3000) to see the a
 
 
 ## Future Improvements
-
-* Add user authentication and profiles
-* Enhance UI/UX with Tailwind CSS or another styling framework
-* Add leaderboards and score history
-* Add multiplayer support or challenge mode
-* Improve accessibility and mobile responsiveness
+- [ ] Add user authentication and profiles
+- [ ] Enhance UI/UX with Tailwind CSS or another styling framework
+- [ ] Add leaderboards and score history
+- [ ] Add multiplayer support or challenge mode
+- [ ] Improve accessibility and mobile responsiveness
 
 
 ## License
